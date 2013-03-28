@@ -166,9 +166,10 @@ module EventCalendar
         cal << %(<table class="ec-row-bg" cellpadding="0" cellspacing="0">)
         cal << %(<tbody><tr>)
         first_day_of_week.upto(first_day_of_week+6) do |day|
-          today_class = (day == Date.today) ? "ec-today-bg" : ""
+          today_class = (day == Date.current) ? "ec-today-bg" : ""
           other_month_class = (day < first) || (day > last) ? 'ec-other-month-bg' : ''
-          cal << %(<td class="ec-day-bg #{today_class} #{other_month_class}">&nbsp;</td>)
+          past_class = day.past? ? "ec-date-past" : ""
+          cal << %(<td class="ec-day-bg #{today_class} #{other_month_class} #{past_class}">&nbsp;</td>)
         end
         cal << %(</tr></tbody></table>)
 
